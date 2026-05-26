@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arvauspeli</title>
-    <link rel="stylesheet" href="css.css">
 </head>
 <body>
     <h1>Arvaa luku: 1-100</h1>
     <input type="number" id="syote" placeholder="Kirjoita arvauksesi">
+    <button onclick="Arvaus()">Arvaa</button>
+
+
+    <p id="viesti"></p>
+    <p id="yritykset"></p>
     
-    <!-- JavaScript code starts here. -->
     <script>
         const luku = Math.floor(Math.random() * 100) +1;
         let yritykset = 0;
@@ -19,14 +22,30 @@
             const syote = document.getElementById("syote").value;
             const arvaus = Number(syote);
             const viesti = document.getElementById("viesti");
+            const yrityksetTeksti = document.getElementById("yritykset");
             
+            yritykset++;
+
+        if (arvaus < 1 || arvaus > 100 || isNaN(arvaus)) {
+            viesti.textContent = "Anna luku väliltä 1–100";
+            return;
+        }
+        
+        if (arvaus === luku) {
+            viesti.textContent = `Oikein! Arvasit luvun ${luku}`;
         }
 
+        else if (arvaus < luku) {
+            viesti.textContent = "Liian pieni";
+        }
+        else {
+            viesti.textContent = "Liian suuri";
+        }
 
+        yrityksetTeksti.textContent = `Yritykset: ${yritykset}`;
+        document.getElementById("syote").value = "";
+    }
     </script>
-
 
 </body>
 </html>
-
-
